@@ -7,8 +7,8 @@ from random import randint
 
 #################### VARIABLES ##############
 ABM_ICBM_ratio = 0
-number_of_ABMs = 41			# Yes, this is really the number of ABMs the USA has.
-number_of_ICBMs = random.randint(5,20)	# Let's generate between 5 and 20 enemy warheads
+number_of_ABMs = 44			# Yes, this is really the number of ABMs the USA has.
+number_of_ICBMs = random.randint(1,20)	# Let's generate between 1 and 20 enemy warheads
 
 hits = 0
 misses = 0
