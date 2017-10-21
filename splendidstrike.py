@@ -7,8 +7,8 @@ from random import randint
 
 #################### VARIABLES ##############
 ABM_ICBM_ratio = 0
-number_of_ABMs = 41
-number_of_ICBMs = random.randint(5,20)
+number_of_ABMs = 41			# Yes, this is really the number of ABMs the USA has.
+number_of_ICBMs = random.randint(5,20)	# Let's generate between 5 and 20 enemy warheads
 
 hits = 0
 misses = 0
@@ -26,7 +26,7 @@ current_target = ""
 
 
 def check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts):
-	if (number_of_ABMs < 1):
+	if (number_of_ABMs < 1 and number_of_ICBMs >0):
 		print "YOU HAVE RUN OUT OF ABMS!"
 		print "Unfortunately, the enemy has not..."
 		nukeouts += number_of_ICBMs
@@ -131,7 +131,15 @@ while (number_of_ICBMs > 0):
 	print "ICBMs incoming! ***"
 	
 	print "This is the ",enemy_salvoes,
-	print "st salvo."
+	if (enemy_salvoes == 1):
+		print "st",
+	elif (enemy_salvoes == 2):
+		print "nd",
+	elif (enemy_salvoes == 3):
+		print "rd",
+	else:
+		print "th",	
+	print "salvo."
 	check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
 
 	print "You have ",number_of_ABMs,
@@ -145,6 +153,7 @@ while (number_of_ICBMs > 0):
 	except:
 		print " Numerals ONLY, please! (sorry Trump, I know you don't like Arabic things, but" 
 		print "we really, REALLY need Arabic numerals!)"
+		ABM_ICBM_ratio = int(input("\n How many ABMs to each ICBM?  >"))
 
 	number_of_ICBMs += enemy_salvo   	# Bit of a bodge this
 
@@ -181,12 +190,12 @@ while (number_of_ICBMs > 0):
 			ABM_salvo -= 1
 			number_of_ABMs -= 1
 			check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
-			enemy_ICBM = random.randint(0,100)
-			your_ABM = random.randint(0,56)
-#			print "\n Enemy ICBM value:",enemy_ICBM
-#			print " Your ABM value:",your_ABM
+			enemy_ICBM = random.randint(0,100) # 100 is the chance the enemy ICBM has of getting through unopposed
+			your_ABM = random.randint(0,56)	# 56 is the percentage chance your ABM will hit the enemy ICBM
+#			print "\n Enemy ICBM value:",enemy_ICBM		# Debugging, uncomment it 
+#			print " Your ABM value:",your_ABM		# if you like
 
-			if ((your_ABM - enemy_ICBM) > 0):
+			if ((your_ABM - enemy_ICBM) > 0): # I THINK it's this way round... heh heh
 				if (current_target == "HIT"):
 					pauser (200)
 					print "\t* ANOTHER HIT! * Well done! You hit the same missile more than once!"
@@ -263,10 +272,10 @@ while (number_of_ICBMs > 0):
 try:
 	cont = int(input("\n Press ENTER to continue"))
 except:	
-	print "",# I don't give a shit
+	print "",
 
 if (nukeouts == 0):
-	time.sleep(1)
+
 	print "__________________________"
 	print "* * * * * ----------------"
 	print "* * * * * ----------------"
@@ -308,7 +317,9 @@ print "This game was inspired by Ankit Panda and Vipin Narang's article in "
 print "War On The Rocks, called \"Deadly Overconfidence:  Trump Thinks "
 print "Missile Defenses Work Against North Korea, and That Should Scare You"
 print "\n Read it here:\n https://warontherocks.com/2017/10/deadly-overconfidence-trump-thinks-missile-defenses-work-against-north-korea-and-that-should-scare-you/"
-
+print "\n\n"
+print "\n If you have any CONSTRUCTIVE opinions to offer, please contact me via Twitter, "
+print "where I go by @andywade"
 print "\n\n"
 
 try:
@@ -317,3 +328,8 @@ except:
 	print "",
 
 quit()
+
+
+
+
+
