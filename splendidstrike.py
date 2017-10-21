@@ -8,7 +8,7 @@ from random import randint
 #################### VARIABLES ##############
 ABM_ICBM_ratio = 0
 number_of_ABMs = 41
-number_of_ICBMs = random.randint(1,20)
+number_of_ICBMs = random.randint(5,20)
 
 hits = 0
 misses = 0
@@ -73,14 +73,19 @@ print "\n\n\n\n\n\n\n\n\n"
 print "\n \t\t Splendid Strike"
 print "\n \tA computer game by Andrew Wade."
 print "\n\n \t(C) Copyright Andrew Wade 2017"
+print "\n Please maximise this window for the best possible experience :-)"
 
+try:
+	cont = int(input("\n Press ENTER to continue"))
+except:	
+	print "",
 
 print "\n You are President Donald Trump... (sorry) \n"
 print " It's a nice, quiet day. You're just getting down to a bit of light "
 print "entertainment at the expense of libtardz, Commies and Rocket Man on "
 print "Twitter, when all of a sudden someone tells you..."
 
-print "\n\n\t NUKES!!! COMMIE NUKES COMIN' TO GET US!!"
+print "\n\t NUKES!!! COMMIE NUKES COMIN' TO GET US!!"
 print "\n You run to the desk of the Oval Office, where you had a computer "
 print "terminal installed that connects you to the missile defence system."
 print "This allows YOU to control America's defences. You have the best "
@@ -88,7 +93,7 @@ print "defences, truly fantastic - and as the most talented bravest cleverest "
 print "person in the world, YOU are the only one who knows how to beat those "
 print "dirty Commies and SAVE AMERICA!"
 print "\n";
-print "\n Each ABM you fire has a 56% chance of hitting the enemy missiles "
+print " Each ABM you fire has a 56% chance of hitting the enemy missiles "
 print "that are raining down on God's Country like dollar bills in one of "
 print "your very classy entertainment resorts. "
 print "\n"
@@ -119,10 +124,8 @@ print "\n\n\n"
 print "\t\t ***************************"
 print "\t\t * WARNING! MISSILE ALERT! *"
 print "\t\t ***************************"
-#time.sleep(1)
-#pauser (200)
 while (number_of_ICBMs > 0):
-	time.sleep(1)
+	pauser (100)
 	enemy_salvo = random.randint(1,number_of_ICBMs)
 	print "\n \t *** There are ",enemy_salvo,
 	print "ICBMs incoming! ***"
@@ -314,8 +317,3 @@ except:
 	print "",
 
 quit()
-
-
-
-
-
