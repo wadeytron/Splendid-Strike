@@ -8,10 +8,7 @@ from random import randint
 #################### VARIABLES ##############
 ABM_ICBM_ratio = 0
 number_of_ABMs = 41
-
-#number_of_ABMs = 4
-number_of_ICBMs = random.randint(8,20)
-#number_of_ICBMs = 5
+number_of_ICBMs = random.randint(1,20)
 
 hits = 0
 misses = 0
