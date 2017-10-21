@@ -26,7 +26,7 @@ current_target = ""
 
 
 def check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts):
-	if (number_of_ABMs < 1 and number_of_ICBMs >0):
+	if (number_of_ABMs < 0 and number_of_ICBMs >0):
 		print "YOU HAVE RUN OUT OF ABMS!"
 		print "Unfortunately, the enemy has not..."
 		nukeouts += number_of_ICBMs
@@ -178,8 +178,6 @@ while (number_of_ICBMs > 0):
 		print " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 		print " !!! Missiles left to shoot down:",enemy_salvo,"!!!"
 		print " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-		number_of_ICBMs -= 1
-		enemy_salvo -= 1
 		ABM_salvo = ABM_ICBM_ratio
 		print "\n Firing ABMS... fingers crossed!"
 		print "ABMs:",number_of_ABMs,"  ICBMs:",number_of_ICBMs,"  nukeouts:",nukeouts
@@ -190,12 +188,8 @@ while (number_of_ICBMs > 0):
 			ABM_salvo -= 1
 			number_of_ABMs -= 1
 			check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
-			enemy_ICBM = random.randint(0,100) # 100 is the chance the enemy ICBM has of getting through unopposed
-			your_ABM = random.randint(0,56)	# 56 is the percentage chance your ABM will hit the enemy ICBM
-#			print "\n Enemy ICBM value:",enemy_ICBM		# Debugging, uncomment it 
-#			print " Your ABM value:",your_ABM		# if you like
-
-			if ((your_ABM - enemy_ICBM) > 0): # I THINK it's this way round... heh heh
+			your_ABM = random.randint(0,100)	 
+			if (your_ABM in range (0,56)):
 				if (current_target == "HIT"):
 					pauser (200)
 					print "\t* ANOTHER HIT! * Well done! You hit the same missile more than once!"
@@ -215,17 +209,10 @@ while (number_of_ICBMs > 0):
 					pauser (500)
 					print "\t ***** AAAARGH YOU MISSED! ABMS LEFT IN SALVO:",ABM_salvo
 				misses += 1
+		number_of_ICBMs -= 1
+		enemy_salvo -= 1
 		if (current_target != "HIT"):
 			time.sleep(1)
-#			print "       ***** "
-#			print "      *******"
-#			print "       ***** "
-#			print "     ********"
-#			print "      ****** "
-#			print "        **  "
-#			print "        **  "
-#			print "        **  "
-#
 			print "AAAAAAAAARRRRRRRRRRRRGGGGGGGGGGGGGGGGHHHHHHHHHHHH!!!!"
 			print " \n"
 			print "          ********************"
