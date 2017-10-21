@@ -9,7 +9,7 @@ Inspired by this article:
 
 https://warontherocks.com/2017/10/deadly-overconfidence-trump-thinks-missile-defenses-work-against-north-korea-and-that-should-scare-you/
 
-NB - It's STRONGLY RECCOMENDED to run Splendid-Strike-colour.py rather than Splendid-strike, unless it doesn't work of course.
+NB - It's STRONGLY RECCOMENDED to run splendidstrike-colour.py rather than splendid-strike.py, unless it doesn't work of course.
 The colour version has a lot of bugs fixed and some kick-ass graphics!
 
 invote with 
