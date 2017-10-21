@@ -9,13 +9,18 @@ Inspired by this article:
 
 https://warontherocks.com/2017/10/deadly-overconfidence-trump-thinks-missile-defenses-work-against-north-korea-and-that-should-scare-you/
 
-NB - It's STRONGLY RECCOMENDED to run splendidstrike-colour.py rather than splendid-strike.py, unless it doesn't work of course.
+NB - It's STRONGLY RECOMMENDED to run splendidstrike-colour.py rather than splendid-strike.py, unless it doesn't work of course.
 The colour version has a lot of bugs fixed and some kick-ass graphics!
 
-invote with 
+Run the program by opening a Terminal window (or Windows Command Prompt) and typing
+
 python splendidstrike-colour.py
 
 or
+
 python splendid-strike.py
 
 if you must!
+
+and follow on-screen instructions. (you're going to want to maximize the window it's in for  a start)
+
