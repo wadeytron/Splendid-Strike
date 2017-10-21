@@ -16,7 +16,7 @@ enemy_salvoes = 1
 begin = ""
 nukeouts = 0
 current_target = ""
-
+ICBMs_in_entire_war = number_of_ICBMs
 
 
 ###################### SUBROUTINES #####################################
@@ -138,7 +138,7 @@ except:
 
 
 print ""
-print "OK, I hope you're ready... starting in ",
+print "  OK, I hope you're ready... starting in ",
 
 
 print "3...",
@@ -162,9 +162,9 @@ while (number_of_ICBMs > 0):
 	pauser (100)
 	enemy_salvo = random.randint(1,number_of_ICBMs)
 	print ('\033[91m'+'\n \t ')
-	print " *** There are ",enemy_salvo, "ICBMs incoming! ***"
+	print "\t *** There are ",enemy_salvo, "ICBMs incoming! ***"
 	print (' '+'\033[0m'),
-	print "This is the ",enemy_salvoes,
+	print "    This is the ",enemy_salvoes,
 	if (enemy_salvoes == 1):
 		print "st",
 	elif (enemy_salvoes == 2):
@@ -172,16 +172,17 @@ while (number_of_ICBMs > 0):
 	elif (enemy_salvoes == 3):
 		print "rd",
 	else:
-		print "th",	
+		print "th",
 	print "salvo."
 	check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
 
-	print "You have ",number_of_ABMs,
+	print "\n   You have ",number_of_ABMs,
 	print "ABMs left."
 	number_of_ICBMs -= enemy_salvo
 
-	print "Intelligence indicates that They still have another",number_of_ICBMs
-	print "left in reserve."
+	if (number_of_ICBMs > 0):
+		print "\n   Intelligence indicates that They will still have another",number_of_ICBMs
+		print "   ICBM(s) left in reserve after this attack."
 	try:
 		ABM_ICBM_ratio = int(input("\n How many ABMs to each ICBM?  >"))
 	except:
@@ -271,8 +272,11 @@ while (number_of_ICBMs > 0):
 	print ('\033[0;30;47m'),	# white
 	print "\n ****************************************"
 	print " *         POST BATTLE REPORT:          *"
+	print " * Total number of enemy missiles:",ICBMs_in_entire_war,"\t*"
 	print " * Enemy missiles fired this round:",enemy_round,"\t*"
-	print " * Total ABMs fired (ever):",ABMs_ever,"\t*"
+	print " * Enemy missiles left:",number_of_ICBMs,"\t\t*"
+	print " * ABMS left:",number_of_ABMs,"\t\t\t*"
+	print " * Total ABMs fired (ever):",ABMs_ever,"\t\t*"
 	print " * Hits: (ever)",hits,"                   \t*"
 	print " * Misses: (ever)",misses,"                \t*"
 	print " * Total cities destroyed:",nukeouts,"    \t*"
