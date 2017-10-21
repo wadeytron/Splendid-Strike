@@ -62,19 +62,23 @@ def NuclearExplosion():
 
 def check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts):
 	if (number_of_ABMs < 0 and number_of_ICBMs >0):
-		print ('\033[7;30;91m'+'\t YOU HAVE RUN OUT OF ABMS!'+'\033[0m')
-		print "Unfortunately, the enemy has not..."
+
+		print ('\033[0;30;41m'+'\t   YOU HAVE RUN OUT OF ABMS!            '+'\033[0m')
+		print ('\033[1;33;41m'+'\t Unfortunately, the enemy has not...    '+'\033[0m')
+
+#		print ('\033[7;30;91m'+'\t   YOU HAVE RUN OUT OF ABMS!'+'\033[0m')
+#		print ('\033[7;30;91m'+'\t Unfortunately, the enemy has not...'+'\033[0m')
 		nukeouts += number_of_ICBMs
 		loop = nukeouts
-		pauser (20000)
+		pauser (40000)
 		NuclearExplosion()
-		print "    KABOOOOOOOOOOOOOOOOOOOOOOM!\n\n ";
+#		print "    KABOOOOOOOOOOOOOOOOOOOOOOM!\n\n ";
 		print "   ",nukeouts,
-		print "American cities have been destroyed!"
+		print "American cities have been destroyed!",
 		print ('\033[3;33;40m'+' ')
 		print " MILLIONS of people are dead, many of whom voted for YOU!"
 		print (' Oh, woe, woe, woe is you! It\'s just so UNFAIR and FAKE!'+'\033[0m')
-		print "\n\n \t GAME OVER \n \n";
+		print "\n \t GAME OVER \n";
 		quit();
 
 
@@ -213,9 +217,9 @@ while (number_of_ICBMs > 0):
 			print ""
 		print ('                                         '+'\033[0m')
 		ABM_salvo = ABM_ICBM_ratio
-		print ('\033[7m')
-		print "\n  Firing ABMS... fingers crossed! "
-		print "ABMs:",number_of_ABMs,"  ICBMs:",number_of_ICBMs,"  nukeouts:",nukeouts
+		print ('\033[0;30;42m')	,	# green
+		print "  Firing ABMS... fingers crossed! "
+		print "ABMs:",number_of_ABMs,"  ICBMs:",number_of_ICBMs,"  nukeouts:",nukeouts,
 		print ('\033[0m')
 		check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
 
@@ -239,17 +243,19 @@ while (number_of_ICBMs > 0):
 					pauser (500)
 					print "\t \t ******   A HIT!  ******\t\t\t\t    ",
 
-				print ('\033[0m')
+				print ('\033[0m')	# back to normal
 				hits += 1
 				abm_salvo = 0
 				current_target = "HIT"
 			else:
+				print ('\033[0;30;47m'),	# white
 				if (current_target == "HIT"):
 					pauser (200)
-					print "\t Your missile screams past the cloud of debris!!"
+					print "\t Your missile screams past the cloud of debris!!",
 				else:
 					pauser (500)
-					print "\t ***** AAAARGH YOU MISSED! ABMS LEFT IN SALVO:",ABM_salvo
+					print "\t ***** AAAARGH YOU MISSED! ABMS LEFT IN SALVO:",ABM_salvo,
+				print ('\033[0m')	# back to normal
 				misses += 1
 		number_of_ICBMs -= 1
 		enemy_salvo -= 1
@@ -262,6 +268,7 @@ while (number_of_ICBMs > 0):
 	enemy_salvoes +=1
 	ABMs_ever = hits+misses
 	print "\n\n"
+	print ('\033[0;30;47m'),	# white
 	print "\n ****************************************"
 	print " *         POST BATTLE REPORT:          *"
 	print " * Enemy missiles fired this round:",enemy_round,"\t*"
@@ -270,7 +277,8 @@ while (number_of_ICBMs > 0):
 	print " * Misses: (ever)",misses,"                \t*"
 	print " * Total cities destroyed:",nukeouts,"    \t*"
 	print " ****************************************\n"
-	print "\n \n Please note that it is possible for more than one ABM to hit a single enemy missile"
+	print "\n Please note that it is possible for more than one ABM to hit a single enemy missile\n"
+	print ('\033[0m')	# back to normal
 	print "\n\n\n"
 
 
@@ -299,20 +307,11 @@ if (nukeouts == 0):
 	print ('\033[0;31;41m'+'                                  '+'\033[0m')
 	print ('\033[2;37;47m'+'                                  '+'\033[0m')
 	print ('\033[0;31;41m'+'                                  '+'\033[0m')
-#	print (''+'\033[0m')
-
-#	print "__________________________"
-#	print "* * * * * ----------------"
-#	print "* * * * * ----------------"
-#	print "* * * * * ----------------"
-#	print "* * * * * ----------------"
-#	print "--------------------------"
-#	print "--------------------------"
-#	print "--------------------------"
-#	print "__________________________"
 	print "\n\n YAAAAAY!! AMERICA HAS SURVIVED!!!"
 	print "\n  YOU WIN AND ARE THE BEST PRESIDENT EVER!!!"
-	print "\n"
+	print "\n Now the missile defence system has been proved"
+	print "infallible, you can bomb all those OTHER places "
+	print "you don't like! Where's your map and pin?"
 
 
 else:
@@ -358,6 +357,7 @@ except:
 	print "",
 
 quit()
+
 
 
 
