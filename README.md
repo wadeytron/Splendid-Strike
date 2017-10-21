@@ -13,7 +13,7 @@ NB - It's STRONGLY RECCOMENDED to run Splendid-Strike-colour.py rather than Sple
 The colour version has a lot of bugs fixed and some kick-ass graphics!
 
 invote with 
-python splendid-strike-colour.py
+python splendidstrike-colour.py
 
 or
 python splendid-strike.py
