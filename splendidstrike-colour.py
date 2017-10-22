@@ -17,10 +17,15 @@ begin = ""
 nukeouts = 0
 current_target = ""
 ICBMs_in_entire_war = number_of_ICBMs
-
+russian_roulette = random.randint(0,100)
 
 ###################### SUBROUTINES #####################################
 
+def PressEnter():
+	try:
+		cont = int(input("\n Press ENTER to continue..."))
+	except:	
+		print "",
 
 
 def NuclearExplosion():
@@ -87,6 +92,146 @@ def pauser(loops):
 	while (loops > 0):
 		loops -=1
 	return
+
+
+
+
+############################### main
+
+def main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits):
+
+	pauser (100)
+	enemy_salvo = random.randint(1,number_of_ICBMs)
+	print ('\033[91m'+'\n \t ')
+	print "\t *** There are ",enemy_salvo, "ICBMs incoming! ***"
+	print (' '+'\033[0m'),
+	print "    This is the ",enemy_salvoes,
+	if (enemy_salvoes == 1):
+		print "st",
+	elif (enemy_salvoes == 2):
+		print "nd",
+	elif (enemy_salvoes == 3):
+		print "rd",
+	else:
+		print "th",
+	print "salvo."
+	check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
+
+	print "\n   You have ",number_of_ABMs,
+	print "ABMs left."
+	number_of_ICBMs -= enemy_salvo
+
+	if (number_of_ICBMs > 0):
+		print "\n   Intelligence indicates that They will still have another",number_of_ICBMs
+		print "   ICBM(s) left in reserve after this attack."
+	try:
+		ABM_ICBM_ratio = int(input("\n How many ABMs to each ICBM?  >"))
+	except:
+		print " Numerals ONLY, please! (sorry Trump, I know you don't like Arabic things, but" 
+		print "we really, REALLY need Arabic numerals!)"
+		ABM_ICBM_ratio = int(input("\n How many ABMs to each ICBM?  >"))
+
+	number_of_ICBMs += enemy_salvo   	# Bit of a bodge this
+
+	ABMs_spent = (ABM_ICBM_ratio * enemy_salvo)
+#	number_of_ABMs -= ABMs_spent
+
+	enemy_round = enemy_salvo;
+
+
+
+	print "\n\n"
+
+	print "*****************************"
+	print "*ENEMY MISSILE SALVO BEGINS!*"
+	print "*****************************"
+
+	time.sleep(1)
+	while (enemy_salvo > 0):
+		time.sleep(1)
+		current_target = ""
+		print "\n\n"
+		print ('\033[7;30;91m'+'                                         ')
+		print "     Missiles left to shoot down:",enemy_salvo,"   ",
+		if (enemy_salvo)<10:
+			print " "
+		else:
+			print ""
+		print ('                                         '+'\033[0m')
+		ABM_salvo = ABM_ICBM_ratio
+		print ('\033[0;30;42m')	,	# green
+		print "  Firing ABMS... fingers crossed! "
+		print "ABMs:",number_of_ABMs,"  ICBMs:",number_of_ICBMs,"  nukeouts:",nukeouts,
+		print ('\033[0m')
+		check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
+
+		while (ABM_salvo >0):
+			time.sleep(1)
+			ABM_salvo -= 1
+			number_of_ABMs -= 1
+			if (current_target != "HIT"):
+				check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)
+			elif (number_of_ABMs < 0 and current_target == "HIT"): # Obscure bug, gaffa taping it
+				print ('\033[7;30;91m'+'\t YOU HAVE RUN OUT OF ABMS AND CANNOT FIRE!'+'\033[0m')
+				pauser(200)
+				break
+			your_ABM = random.randint(0,100)	 
+			if (your_ABM in range (0,56)):
+				print ('\033[44m'),
+				if (current_target == "HIT"):
+					pauser (200)
+					print "\t* ANOTHER HIT! * Well done! You hit the same missile more than once!",
+				else:
+					pauser (500)
+					print "\t \t ******   A HIT!  ******\t\t\t\t    ",
+
+				print ('\033[0m')	# back to normal
+				hits += 1
+				abm_salvo = 0
+				current_target = "HIT"
+			else:
+				print ('\033[0;30;47m'),	# white
+				if (current_target == "HIT"):
+					pauser (200)
+					print "\t Your missile screams past the cloud of debris!!",
+				else:
+					pauser (500)
+					print "\t ***** AAAARGH YOU MISSED! ABMS LEFT IN SALVO:",ABM_salvo,
+				print ('\033[0m')	# back to normal
+				misses += 1
+
+		if (number_of_ABMs < 0):	# Obscure bug, 2nd part of fix
+			number_of_ABMs = 0	# 
+		number_of_ICBMs -= 1
+		enemy_salvo -= 1
+		if (current_target != "HIT"):
+			time.sleep(1)
+			NuclearExplosion()
+			nukeouts += 1
+
+	time.sleep(1)
+	enemy_salvoes +=1
+	ABMs_ever = hits+misses
+	print "\n\n"
+	print ('\033[0;30;47m'),	# white
+	print "\n ****************************************"
+	print " *         POST BATTLE REPORT:          *"
+	print " * Total number of enemy missiles:",ICBMs_in_entire_war,"\t*"
+	print " * Enemy missiles fired this round:",enemy_round,"\t*"
+	print " * Enemy missiles left:",number_of_ICBMs,"\t\t*"
+	print " * ABMS left:",number_of_ABMs,"\t\t\t*"
+	print " * Total ABMs fired (ever):",ABMs_ever,"\t\t*"
+	print " * Hits: (ever)",hits,"                   \t*"
+	print " * Misses: (ever)",misses,"                \t*"
+	print " * Total cities destroyed:",nukeouts,"    \t*"
+	print " ****************************************\n"
+	print "\n Please note that it is possible for more than one ABM to hit a single enemy missile\n"
+	print ('\033[0m')	# back to normal
+	print "\n\n\n"
+	return (number_of_ICBMs,number_of_ABMs,enemy_salvoes,nukeouts)
+
+
+
 
 ############################ MAIN PROGRAM #######################################
 
@@ -159,132 +304,7 @@ print ('\033[91m'+' WARNING! MISSILE ALERT!'+'\033[0m'),
 print " *"
 print "\t\t ******************************"
 while (number_of_ICBMs > 0):
-	pauser (100)
-	enemy_salvo = random.randint(1,number_of_ICBMs)
-	print ('\033[91m'+'\n \t ')
-	print "\t *** There are ",enemy_salvo, "ICBMs incoming! ***"
-	print (' '+'\033[0m'),
-	print "    This is the ",enemy_salvoes,
-	if (enemy_salvoes == 1):
-		print "st",
-	elif (enemy_salvoes == 2):
-		print "nd",
-	elif (enemy_salvoes == 3):
-		print "rd",
-	else:
-		print "th",
-	print "salvo."
-	check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
-
-	print "\n   You have ",number_of_ABMs,
-	print "ABMs left."
-	number_of_ICBMs -= enemy_salvo
-
-	if (number_of_ICBMs > 0):
-		print "\n   Intelligence indicates that They will still have another",number_of_ICBMs
-		print "   ICBM(s) left in reserve after this attack."
-	try:
-		ABM_ICBM_ratio = int(input("\n How many ABMs to each ICBM?  >"))
-	except:
-		print " Numerals ONLY, please! (sorry Trump, I know you don't like Arabic things, but" 
-		print "we really, REALLY need Arabic numerals!)"
-		ABM_ICBM_ratio = int(input("\n How many ABMs to each ICBM?  >"))
-
-	number_of_ICBMs += enemy_salvo   	# Bit of a bodge this
-
-	ABMs_spent = (ABM_ICBM_ratio * enemy_salvo)
-#	number_of_ABMs -= ABMs_spent
-
-	enemy_round = enemy_salvo;
-
-
-
-	print "\n\n"
-
-	print "*****************************"
-	print "*ENEMY MISSILE SALVO BEGINS!*"
-	print "*****************************"
-
-	time.sleep(1)
-	while (enemy_salvo > 0):
-		time.sleep(1)
-		current_target = ""
-		print "\n\n"
-		print ('\033[7;30;91m'+'                                         ')
-		print "     Missiles left to shoot down:",enemy_salvo,"   ",
-		if (enemy_salvo)<10:
-			print " "
-		else:
-			print ""
-		print ('                                         '+'\033[0m')
-		ABM_salvo = ABM_ICBM_ratio
-		print ('\033[0;30;42m')	,	# green
-		print "  Firing ABMS... fingers crossed! "
-		print "ABMs:",number_of_ABMs,"  ICBMs:",number_of_ICBMs,"  nukeouts:",nukeouts,
-		print ('\033[0m')
-		check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
-
-		while (ABM_salvo >0):
-			time.sleep(1)
-			ABM_salvo -= 1
-			number_of_ABMs -= 1
-			if (current_target != "HIT"):
-				check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)
-			elif (number_of_ABMs <1 and current_target == "HIT"):
-				print ('\033[7;30;91m'+'\t YOU HAVE RUN OUT OF ABMS AND CANNOT FIRE!'+'\033[0m')
-				pauser(200)
-				break
-			your_ABM = random.randint(0,100)	 
-			if (your_ABM in range (0,56)):
-				print ('\033[44m'),
-				if (current_target == "HIT"):
-					pauser (200)
-					print "\t* ANOTHER HIT! * Well done! You hit the same missile more than once!",
-				else:
-					pauser (500)
-					print "\t \t ******   A HIT!  ******\t\t\t\t    ",
-
-				print ('\033[0m')	# back to normal
-				hits += 1
-				abm_salvo = 0
-				current_target = "HIT"
-			else:
-				print ('\033[0;30;47m'),	# white
-				if (current_target == "HIT"):
-					pauser (200)
-					print "\t Your missile screams past the cloud of debris!!",
-				else:
-					pauser (500)
-					print "\t ***** AAAARGH YOU MISSED! ABMS LEFT IN SALVO:",ABM_salvo,
-				print ('\033[0m')	# back to normal
-				misses += 1
-		number_of_ICBMs -= 1
-		enemy_salvo -= 1
-		if (current_target != "HIT"):
-			time.sleep(1)
-			NuclearExplosion()
-			nukeouts += 1
-
-	time.sleep(1)
-	enemy_salvoes +=1
-	ABMs_ever = hits+misses
-	print "\n\n"
-	print ('\033[0;30;47m'),	# white
-	print "\n ****************************************"
-	print " *         POST BATTLE REPORT:          *"
-	print " * Total number of enemy missiles:",ICBMs_in_entire_war,"\t*"
-	print " * Enemy missiles fired this round:",enemy_round,"\t*"
-	print " * Enemy missiles left:",number_of_ICBMs,"\t\t*"
-	print " * ABMS left:",number_of_ABMs,"\t\t\t*"
-	print " * Total ABMs fired (ever):",ABMs_ever,"\t\t*"
-	print " * Hits: (ever)",hits,"                   \t*"
-	print " * Misses: (ever)",misses,"                \t*"
-	print " * Total cities destroyed:",nukeouts,"    \t*"
-	print " ****************************************\n"
-	print "\n Please note that it is possible for more than one ABM to hit a single enemy missile\n"
-	print ('\033[0m')	# back to normal
-	print "\n\n\n"
-
+	(number_of_ICBMs,number_of_ABMs,enemy_salvoes,nukeouts) = main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits)
 
 
 try:
@@ -316,6 +336,42 @@ if (nukeouts == 0):
 	print "\n Now the missile defence system has been proved"
 	print "infallible, you can bomb all those OTHER places "
 	print "you don't like! Where's your map and pin?"
+
+	if (russian_roulette > 30):
+		PressEnter()
+		print "\n\n\n"
+		print "\n\n\n"
+		print "\t\t\t BUT THEN....\n";
+		print "\n Your partying is interrupted by the sounds of a "
+		print "VERY LOUD KLAXON! \n"
+		print "The ",
+		print ('\033[91m'+'BIG RED PHONE'+'\033[0m'),
+		print " is ringing. You scoop it up and "
+		print "who should it be but YOUR BOSS, Vladimir Putin!"
+		print "\n"
+		print "He is extremely distraught and yells at you "
+		print ""
+		print ('\033[1;37;44m'+'  \"What the f*** do you think you\'re doing you '+'\033[0m')
+		print ('\033[7;30;91m'+'   f**ing c*cks*ck*r? I told you - don\'t F*CK  '+'\033[0m')
+		print ('\033[0;30;47m'+'         with Mutha Russia!!!!\"                '+'\033[0m'),
+		print ""
+		print "Putin slams the phone down and you look up into "
+		print "the panicked face of yet another aide."
+		print ""
+		print "  \"Mr. President, sir, it seems the Russians "
+		print "    mistook our ABM launches for an attack! "
+		print "       We gotta get ya to safety sir! \""
+		print " "
+		print " \"No time for that Boy\", you growl, \"I'll handle this!\""
+		print ""
+		PressEnter()
+		number_of_ICBMs = 7000
+		enemy_salvoes = 0
+		while (number_of_ICBMs > 0):
+			(number_of_ICBMs,number_of_ABMs,enemy_salvoes,nukeouts) = main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits)
+
+
+		
 
 
 else:
@@ -351,6 +407,7 @@ print " and That Should Scare You"
 print "\n Read it here:\n https://warontherocks.com/2017/10/deadly-overconfidence-trump-thinks-missile-defenses-work-against-north-korea-and-that-should-scare-you/"
 print "\n Or here: \n http://carnegieendowment.org/2017/10/17/deadly-overconfidence-trump-thinks-missile-defenses-work-against-north-korea-and-that-should-scare-you-pub-73451"
 print "\n\n"
+print "\n Also, see this: https://www.thedailybeast.com/how-a-north-korean-missile-could-accidentally-trigger-a-us-russia-nuclear-war"
 print "\n If you have any CONSTRUCTIVE opinions to offer, please contact me via Twitter, "
 print "where I go by @andywade"
 print "\n\n"
