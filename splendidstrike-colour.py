@@ -9,18 +9,44 @@ from random import randint
 _ICBM_ratio = 0
 number_of_ABMs = 44			# Yes, this is really the number of ABMs the USA has.
 number_of_ICBMs = random.randint(1,20)	# Let's generate between 1 and 20 enemy warheads
-
+ICBMs_in_entire_war = number_of_ICBMs
 hits = 0
 misses = 0
 enemy_salvoes = 1
 begin = ""
 nukeouts = 0
 current_target = ""
-ICBMs_in_entire_war = number_of_ICBMs
 russian_roulette = random.randint(0,100)
 
 ###################### SUBROUTINES #####################################
+def other_side_effects(nukeouts,ICBMs_in_entire_war):
 
+#	print "nukeouts:", nukeouts
+#	print "ICBMS in war:", ICBMs_in_entire_war
+
+	shot_down_ICBMs = (ICBMs_in_entire_war - nukeouts)	
+	chance_of_kessler = random.randint(0,shot_down_ICBMs)
+
+#	print "shot down ICBMs:",shot_down_ICBMs
+#	print "chance of Kessler:",chance_of_kessler
+	if (chance_of_kessler > 6):
+		print "\n You have shot down so many ICBMs that they have collided with"
+		print "other objects in space to cause the dreaded ABLATION CASCADE"
+		print "(AKA Kessler Syndrome), essentially the debris from your little"
+		print "war has crashed into orbiting satellites, blowing them to bits."
+		print "The bits have in turn smashed into other satellites, a result of "
+		print "which is, we can no longer use our satellites or launch new ones."
+		print "\n In fact, space will be inaccessible for many decades, perhaps ";
+		print "even centuries, to come."
+
+	if (shot_down_ICBMs > 0):
+		print "\n Also, the plutonium and uranium from the",shot_down_ICBMs,"ICBMs"
+		print "you shot down is raining down on Earth, causing "
+		print "environmentalists to become upset and slowly giving "
+		print "everyone cancer. \n"
+
+	
+		
 def PressEnter():
 	try:
 		cont = int(input("\n Press ENTER to continue..."))
@@ -82,6 +108,8 @@ def check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts):
 		print "American cities have been destroyed!",
 		print ('\033[3;33;40m'+' ')
 		print " MILLIONS of people are dead, many of whom voted for YOU!"
+#		print "DEBUG: Before call: Nukeouts;",nukeouts,"ICBMs in war:",ICBMs_in_entire_war
+		other_side_effects(nukeouts,ICBMs_in_entire_war)
 		print (' Oh, woe, woe, woe is you! It\'s just so UNFAIR and FAKE!'+'\033[0m')
 		print "\n";
 		if (nukeouts > 30):
@@ -112,8 +140,7 @@ def pauser(loops):
 
 ############################### main_loop ########################################
 
-def main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits):
-
+def main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits,ICBMs_in_entire_war):
 	pauser (100)
 	enemy_salvo = random.randint(1,number_of_ICBMs)
 	print ('\033[91m'+'\n \t ')
@@ -323,7 +350,7 @@ print ('\033[91m'+' WARNING! MISSILE ALERT!'+'\033[0m'),
 print " *"
 print "\t\t ******************************"
 while (number_of_ICBMs > 0):
-	(number_of_ICBMs,number_of_ABMs,enemy_salvoes,nukeouts) = main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits)
+	(number_of_ICBMs,number_of_ABMs,enemy_salvoes,nukeouts) = main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits, ICBMs_in_entire_war)
 
 
 try:
@@ -355,8 +382,10 @@ if (nukeouts == 0):
 	print "\n Now the missile defence system has been proved"
 	print "infallible, you can bomb all those OTHER places "
 	print "you don't like! Where's your map and pin?"
+	other_side_effects(nukeouts,ICBMs_in_entire_war)
+	print "\n\n";
 
-	if (russian_roulette > 25):
+	if (russian_roulette > 15):
 		PressEnter()
 		print "\n\n\n"
 		print "\n\n\n\n"
@@ -395,10 +424,11 @@ if (nukeouts == 0):
 
 
 
-		number_of_ICBMs = 7000
+		number_of_ICBMs = random.randint(299,1801)
+		ICBMs_in_entire_war = number_of_ICBMs
 		enemy_salvoes = 1
 		while (number_of_ICBMs > 0):
-			(number_of_ICBMs,number_of_ABMs,enemy_salvoes,nukeouts) = main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits)
+			(number_of_ICBMs,number_of_ABMs,enemy_salvoes,nukeouts) = main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits, ICBMs_in_entire_war)
 
 
 		
@@ -409,7 +439,8 @@ else:
 	print "\n"
 	print ('\033[3;33;40m'+' Well, I hope you\'re pleased with yourself. Only'), nukeouts
 	print " American cities have been blown to smithereens. "
-	print "\n\n Of course, North Korea has been reduced to its constituent "
+	other_side_effects(nukeouts,ICBMs_in_entire_war)
+	print "\n Of course, North Korea has been reduced to its constituent "
 	print " atoms, so there's always that."
 	print "\n"
 	print " Still, you'll be able to build some nice hotels and resorts "
@@ -423,7 +454,7 @@ else:
 
 
 
-print "\n\n"
+print "\n"
 
 try:
 	cont = int(input("\n Press ENTER for the sleeve notes..."))
