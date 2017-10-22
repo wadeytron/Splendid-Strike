@@ -6,7 +6,7 @@ import random
 from random import randint
 
 #################### VARIABLES ##############
-ABM_ICBM_ratio = 0
+_ICBM_ratio = 0
 number_of_ABMs = 44			# Yes, this is really the number of ABMs the USA has.
 number_of_ICBMs = random.randint(1,20)	# Let's generate between 1 and 20 enemy warheads
 
@@ -83,6 +83,20 @@ def check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts):
 		print ('\033[3;33;40m'+' ')
 		print " MILLIONS of people are dead, many of whom voted for YOU!"
 		print (' Oh, woe, woe, woe is you! It\'s just so UNFAIR and FAKE!'+'\033[0m')
+		print "\n";
+		if (nukeouts > 30):
+			print ('\033[3;33;40m'+' ')
+			print "It gets worse. Nuclear winter turns the planet into a radioactive iceball"
+			print "and as a reult, Mar-A-Lago and your other fine resorts are completely "
+			print "snowed under. Your guests are very cross and demand their money back."
+			print "YOU ARE FINANCIALLY RUINED, and because everyone else is dead, there is "
+			print "nobody left alive to bail you out."
+			print "\n You spend the rest of your life eating baked beans and Spam in a "
+			print "very classy nuclear bunker, which very soon smells unbearable. Outside, "
+			print "MEXICANS have taken over, cleared all the dead bodies away, and turned"
+			print "the USA into a massive ski resort."
+			print ('\033[0m')
+
 		print "\n \t GAME OVER \n";
 		quit();
 
@@ -96,7 +110,7 @@ def pauser(loops):
 
 
 
-############################### main
+############################### main_loop ########################################
 
 def main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits):
 
@@ -159,10 +173,12 @@ def main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, 
 			print ""
 		print ('                                         '+'\033[0m')
 		ABM_salvo = ABM_ICBM_ratio
-		print ('\033[0;30;42m')	,	# green
-		print "  Firing ABMS... fingers crossed! "
-		print "ABMs:",number_of_ABMs,"  ICBMs:",number_of_ICBMs,"  nukeouts:",nukeouts,
+		print ('\033[0;30;42m'+'  Firing ABMS... fingers crossed! '+'\033[0m')	# green
+		print ('\033[0;30;42m'+'ABMs:'),
+		print number_of_ABMs,'  ICBMs:',number_of_ICBMs,'  nukeouts:',nukeouts,
 		print ('\033[0m')
+#		print ('ABMs:',number_of_ABMs,'  ICBMs:',number_of_ICBMs,'  nukeouts:',nukeouts+'\033[0m')
+#		print ('ABMs:',number_of_ABMs,'  ICBMs:',number_of_ICBMs,'  nukeouts:',nukeouts+'\033[0m')
 		check_if_out_of_ABMs(number_of_ABMs, number_of_ICBMs, nukeouts)	
 
 		while (ABM_salvo >0):
@@ -212,6 +228,8 @@ def main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, 
 	time.sleep(1)
 	enemy_salvoes +=1
 	ABMs_ever = hits+misses
+#	hits_this_round = hits
+#	misses_this_round = misses
 	print "\n\n"
 	print ('\033[0;30;47m'),	# white
 	print "\n ****************************************"
@@ -221,8 +239,8 @@ def main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, 
 	print " * Enemy missiles left:",number_of_ICBMs,"\t\t*"
 	print " * ABMS left:",number_of_ABMs,"\t\t\t*"
 	print " * Total ABMs fired (ever):",ABMs_ever,"\t\t*"
-	print " * Hits: (ever)",hits,"                   \t*"
-	print " * Misses: (ever)",misses,"                \t*"
+	print " * Hits: (this round)",hits,"\t\t*"
+	print " * Misses: (this round)",misses,"\t\t*"
 	print " * Total cities destroyed:",nukeouts,"    \t*"
 	print " ****************************************\n"
 	print "\n Please note that it is possible for more than one ABM to hit a single enemy missile\n"
@@ -236,6 +254,7 @@ def main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, 
 ############################ MAIN PROGRAM #######################################
 
 print "\n\n\n\n\n\n\n\n\n"
+#print "RR:",russian_roulette
 print ('\033[91m'+'')
 print "\n \t\t Splendid Strike",
 print (''+'\033[0m')
@@ -337,36 +356,47 @@ if (nukeouts == 0):
 	print "infallible, you can bomb all those OTHER places "
 	print "you don't like! Where's your map and pin?"
 
-	if (russian_roulette > 30):
+	if (russian_roulette > 25):
 		PressEnter()
 		print "\n\n\n"
-		print "\n\n\n"
+		print "\n\n\n\n"
 		print "\t\t\t BUT THEN....\n";
-		print "\n Your partying is interrupted by the sounds of a "
-		print "VERY LOUD KLAXON! \n"
-		print "The ",
+		print "\n Your partying is interrupted by the sound of a "
+		print ('\033[7;30;91m'+'               VERY LOUD KLAXON!                '+'\033[0m')
+		print ""
+		print " The ",
 		print ('\033[91m'+'BIG RED PHONE'+'\033[0m'),
 		print " is ringing. You scoop it up and "
-		print "who should it be but YOUR BOSS, Vladimir Putin!"
+		print " who should it be but YOUR BOSS, Vladimir Putin!"
 		print "\n"
-		print "He is extremely distraught and yells at you "
+		print " He is extremely distraught and yells at you "
 		print ""
 		print ('\033[1;37;44m'+'  \"What the f*** do you think you\'re doing you '+'\033[0m')
 		print ('\033[7;30;91m'+'   f**ing c*cks*ck*r? I told you - don\'t F*CK  '+'\033[0m')
 		print ('\033[0;30;47m'+'         with Mutha Russia!!!!\"                '+'\033[0m'),
 		print ""
-		print "Putin slams the phone down and you look up into "
-		print "the panicked face of yet another aide."
+		print " Putin slams the phone down and you look up into "
+		print " the panicked face of yet another aide."
 		print ""
 		print "  \"Mr. President, sir, it seems the Russians "
 		print "    mistook our ABM launches for an attack! "
 		print "       We gotta get ya to safety sir! \""
 		print " "
-		print " \"No time for that Boy\", you growl, \"I'll handle this!\""
-		print ""
+		print ('\033[3;33;40m'+' \"No time for that Boy\"'+'\033[0m')+' you growl,',
+		print ('\033[3;33;40m'+'\"I\'ll handle this!\"'+'\033[0m')
+		print "\n\n"
 		PressEnter()
+		print "\n\n\n\n\n"
+		print "\t\t ******************************"
+		print "\t\t *",
+		print ('\033[91m'+' WARNING! MISSILE ALERT!'+'\033[0m'),
+		print " *"
+		print "\t\t ******************************"
+
+
+
 		number_of_ICBMs = 7000
-		enemy_salvoes = 0
+		enemy_salvoes = 1
 		while (number_of_ICBMs > 0):
 			(number_of_ICBMs,number_of_ABMs,enemy_salvoes,nukeouts) = main_loop(number_of_ICBMs, enemy_salvoes, number_of_ABMs, nukeouts, misses, hits)
 
@@ -383,7 +413,7 @@ else:
 	print " atoms, so there's always that."
 	print "\n"
 	print " Still, you'll be able to build some nice hotels and resorts "
-	print " once all the dead bodies have been cleared up! "
+	print " once all the dead bodies have been cleared away! "
 	print " "	
 	print " BTW, some gentlemen from INTERPOL want to talk to you about "
 	print " war crimes charges..."
