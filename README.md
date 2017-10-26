@@ -11,7 +11,7 @@ https://warontherocks.com/2017/10/deadly-overconfidence-trump-thinks-missile-def
 
 **Run splendid-strike.py first, if it doesn't work, splendidstrike-BW.py will give you some idea of what you're missing.**
 
-(Colour problems may result from using it in Windows- I'm working on it!)
+Windows users must have the Colorama module installed, or problems may wel ensure.
 
 Run the program by opening a Terminal window (or Windows Command Prompt) and typing
 
