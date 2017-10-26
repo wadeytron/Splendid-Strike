@@ -15,11 +15,11 @@ https://warontherocks.com/2017/10/deadly-overconfidence-trump-thinks-missile-def
 
 Run the program by opening a Terminal window (or Windows Command Prompt) and typing
 
-python splendidstrike-colour.py
+python splendid-strike.py
 
 or
 
-python splendid-strike.py
+python splendidstrike-BW.py
 
 if you must!
 
