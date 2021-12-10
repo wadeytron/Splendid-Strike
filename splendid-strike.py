@@ -6,8 +6,8 @@
 # Problem: "Abms fired ever" is actually abms fired this round
 
 
-from colorama import init
-init()
+#from colorama import init
+#init()
 import os
 import sys
 import time
